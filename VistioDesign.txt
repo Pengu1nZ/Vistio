@@ -1,0 +1,120 @@
+MODULES:
+
+	Command.lua:
+		-Command Parsing
+		-Chat Notifications
+		-Command Logging
+		
+	Access.lua:
+		-Flags
+		-Access Groups
+		-Access Checking
+		
+	Database.lua
+		-Database Connecting
+		-Queue
+		-Query Callbacks from Queue
+		-Log all queries
+
+	Connect.lua
+		-Check if player is banned
+		-Assign flags to players when they join
+		-Log all attempted connections
+		
+	Logging.lua
+		-Logging Queue
+		-Log dump every hour/map change
+			-Local Log Dump
+			-Website Log dump
+			-File Title Format: map_name:mm-hh-dd-mm-yyyy
+			
+	Playtime.lua
+		-Playtime counter to replace UTime
+		-MySQL based
+	
+COMMANDS:
+
+	Base:
+		-Ban				| "M"
+		-BanID				| "M"
+		-SetGroup			| "D"
+		-SetGroupID			| "D"
+		-UnbanID			| "D"
+		-Kick				| "M"
+		-Slay				| "M"
+		-MuteVoice(Toggle)	| "M"
+		-MuteChat(Toggle)	| "M"
+		-Freeze(Toggle)		| "A"
+		-Goto				| "M"
+		-Bring				| "M"
+		-Tele				| "A"
+		-Send				| "A"
+		
+PLUGINS:
+
+	JukeBox:
+		COMMANDS:
+			-Play			| "U"
+			-PlayAll		| "D"
+			-Stop			| "U"
+			-SongList		| "U"
+		FEATURES:
+			-Full SongList GUI
+			-URL Songs instead of DLing
+			-Song Request on Website
+	
+	TTT:
+		COMMANDS
+			-Force			| "S"
+			-ForceNR		| "M"
+			-SlayNR			| "M"
+			-RSlayNR		| "M"
+			-SetKarma		| "A"
+			-SlayNRID		| "M"
+			-RSlayNRID		| "M"
+			-Respawn		| "M"
+			-RespawnTP		| "M"
+
+			
+			
+WEB:
+	
+	DATABASE:
+		-Two tables
+			-Playerdata
+				-userid(index)
+				-Name
+				-SteamID
+				-PlayTime
+				-LastSeen
+				-UserGroup
+				-Flags
+			-Bans
+				-banid(index)
+				-plyname
+				-plysteamid
+				-adminname
+				-adminsteamid
+				-time
+				-timecreated
+				-reason
+				-unban
+				-unbanreason
+	
+	Web Pages:
+		-Staff
+		-Bans
+	
+MISC:
+
+	AcessGroups and their flags(Descending Order):
+		SUPERADMIN		| "S"
+		DOUBLEADMIN		| "D"
+		ADMIN			| "A"
+		MODERATOR		| "M"
+		VIP				| "V"
+		USER			| "U"
+		
+
+		
+		
