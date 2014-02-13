@@ -112,7 +112,7 @@ MISC:
 		DOUBLEADMIN		| "D"
 		ADMIN			| "A"
 		MODERATOR		| "M"
-		VIP				| "V"
+		VIP			| "V"
 		USER			| "U"
 		
 
