@@ -2,4 +2,18 @@ TODO:
 	-All Modules
 	-All Plugins
 	-Define Command Structure
-	-Command
+	-Commands n shit
+	
+ORDER IN WHICH WE SHOULD DO SHET:
+
+	1. Modules
+		a. Commands.lua
+		b. Access.lua
+		c. Database.lua
+		d. Connect.lua
+		e. Logging.lua
+		f. Playtime.lua
+	2. Commands
+	3. TTT Plugin
+	4. Web shite
+	
