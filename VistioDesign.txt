@@ -104,6 +104,7 @@ WEB:
 	Web Pages:
 		-Staff
 		-Bans
+		-Members (every user that ever connects)
 	
 MISC:
 
