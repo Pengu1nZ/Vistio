@@ -21,6 +21,13 @@ function db:onConnectionFailed(err)
         MsgN('VISTIO SQL is encountering an error: ' .. err)
 end
 
+
+function VISTIO.GetName(calling_ply, steamid)
+	local q = db:query("SELECT name FROM playerdata WHERE steamid='"..steamid.."' ;")
+	q:start()
+
+end
+
 function VISTIO.BanQuery(calling_ply, target_ply, reason, bantime )
 	local AdminName = calling_ply:Name() 		--Grab admin name
 	local AdminID = calling_ply:SteamID()		--Grab Admin SteamID
@@ -34,6 +41,25 @@ function VISTIO.BanQuery(calling_ply, target_ply, reason, bantime )
 	local q = db:query("INSERT INTO bans ( `plysteamid`, `plyname`, `adminname`, `adminsteamid`, `reason`, `time`, `unbantime`, `timecreated` ) VALUES( '"..TargetID.."', '"..db:escape(TargetName).."', '"..db:escape(AdminName).."', '"..AdminID.."', '"..db:escape(reason).."', "..BanTimeSeconds..", "..UnbanTime..", "..TimeCreated.."	);")
 	
 end
+
+function VISTIO.BanIDQuery(calling_ply, steamid, TargetName, reason, bantime )
+	local AdminName = calling_ply:Name() 		--Grab admin name
+	local AdminID = calling_ply:SteamID()		--Grab Admin SteamID
+	local TargetID = steamid					--just change the variable cuz lazy
+	local TimeCreated = os.time()				--Grab the Time the ban was created
+	local BanTimeSeconds = bantime * 60			--Get the ban time from minutes to seconds
+	local UnbanTime = TimeCreated + BanTimeSeconds	--Create the time where he'll be unbanned
+	
+	--Set up the query for a ban
+	if bantime != 0 then
+		local q = db:query("INSERT INTO bans ( `plysteamid`, `plyname`, `adminname`, `adminsteamid`, `reason`, `time`, `unbantime`, `timecreated` ) VALUES( '"..TargetID.."', '"..db:escape(TargetName).."', '"..db:escape(AdminName).."', '"..AdminID.."', '"..db:escape(reason).."', "..BanTimeSeconds..", "..UnbanTime..", "..TimeCreated.."	);")
+	elseif bantime == 0 then
+		local q = db:query("INSERT INTO bans ( `plysteamid`, `plyname`, `adminname`, `adminsteamid`, `reason`, `time`, `unbantime`, `timecreated` ) VALUES( '"..TargetID.."', '"..db:escape(TargetName).."', '"..db:escape(AdminName).."', '"..AdminID.."', '"..db:escape(reason).."', 0, "..UnbanTime..", "..TimeCreated.."	);")
+	end
+	
+	q:start()
+end
+
 
 function VISTIO.AddUserQuery(calling_ply, target_ply, usergroup, time)
 	local AdminName = calling_ply:Name() 		--Grab admin name
@@ -49,13 +75,14 @@ function VISTIO.AddUserQuery(calling_ply, target_ply, usergroup, time)
 	elseif time = 0 then
 		local q = db:query("UPDATE playerdata SET name='"..TargetName.."', accessgroup='"..usergroup.."', expiretime=0 WHERE steamid='"..TargetID.." ;")
 	end
+	
+	q:start()
 end
 
-function VISTIO.AddUserIDQuery(calling_ply, steamid, usergroup, time)
+function VISTIO.AddUserIDQuery(calling_ply, TargetName, steamid, usergroup, time)
 	local AdminName = calling_ply:Name() 		--Grab admin name
 	local AdminID = calling_ply:SteamID()		--Grab Admin SteamID
-	local TargetName = target_ply:Name()		--Grab the Target's Name
-	local TargetID = target_ply:SteamID()		--Grab the Target's SteamID
+	local TargetID = steamid					--Swap Variables
 	local TimeCreated = os.time()				--Grab the Time the user was set
 	local LengthSeconds = time * 60				--Change trial length from minutes to seconds
 	local ExpireTime = TimeCreated + LengthSeconds	--Create the time where the rank expires
@@ -65,6 +92,8 @@ function VISTIO.AddUserIDQuery(calling_ply, steamid, usergroup, time)
 	elseif time = 0 then
 		local q = db:query("UPDATE playerdata SET  accessgroup='"..usergroup.."', expiretime=0 WHERE steamid='"..TargetID.." ;")
 	end
+	
+	q:start()
 end
 
 
@@ -77,4 +106,4 @@ function q:onSuccess( q )
 		MsgN("Query successful!")
 end
 
-q:start()
+db:connect()
