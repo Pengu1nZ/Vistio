@@ -27,6 +27,12 @@ MODULES:
 			-Local Log Dump
 			-Website Log dump
 			-File Title Format: map_name:mm-hh-dd-mm-yyyy
+		-Things to log
+			-Chat
+			-Kills
+			-Damage
+			-Serverwide Jukebox songs
+			
 			
 	Playtime.lua
 		-Playtime counter to replace UTime
@@ -55,7 +61,7 @@ PLUGINS:
 	JukeBox:
 		COMMANDS:
 			-Play			| "U"
-			-PlayAll		| "D"
+			-PlayAll		| "J"
 			-Stop			| "U"
 			-SongList		| "U"
 		FEATURES:
@@ -113,7 +119,7 @@ MISC:
 		DOUBLEADMIN		| "D"
 		ADMIN			| "A"
 		MODERATOR		| "M"
-		VIP			| "V"
+		VIP				| "V"
 		USER			| "U"
 		
 
