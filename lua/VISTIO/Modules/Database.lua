@@ -120,20 +120,26 @@ function VISTIO.IsPlayerBanned(steamid)
 end
 
 function VISTIO.BanExpired(steamid)
-	local q = db:query("UPDATE bans SET unbanreason='EXPIRED' WHERE steamid='"..steamid.."';")
+	local q = db:query("UPDATE bans SET unbanreason='EXPIRED' WHERE steamid='"..steamid.."';") --If the ban expires normally, set the reason to expired
 	q:start()
 
 end
 
 function VISTIO.UnbanPlayer(steamid)
-	local q = db:query("UPDATE bans SET unbanreason='UNBANNED' WHERE steamid='"..steamid.."';")
+	local q = db:query("UPDATE bans SET unbanreason='UNBANNED' WHERE steamid='"..steamid.."';") -- If the person is manually unbanned, set the reason to unbanned
 	q:start()
 	
 end
 
+function VISTIO.GetPlayerFlags(steamid)
+	local q = db:query("SELECT flags FROM playerdata WHERE steamid='"..steamid.."';")
+	q:start()
+	
+	local PlayerFlags = flags --localize4jeezus
+end
 
 function q:onError( q, err , sql )
-		MsgN("Query failed! /n Error:" ..err.. "/n You should tell a super about this!")
+		MsgN("Query failed! /n Error:" ..err)
 end
 	
 function q:onSuccess( q )
