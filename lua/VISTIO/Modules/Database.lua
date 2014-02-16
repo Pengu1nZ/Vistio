@@ -14,7 +14,7 @@ local db = mysqloo.connect(mysql_hostname, mysql_username, mysql_password, mysql
 
 
 function db:onConnected()
-        MsgN('VISTIO Connect to SQL Database!')
+        MsgN('VISTIO has successfully connected to SQL Database!')
 end
 
 function db:onConnectionFailed(err)
@@ -25,7 +25,7 @@ end
 function VISTIO.GetName(calling_ply, steamid)
 	local q = db:query("SELECT name FROM playerdata WHERE steamid='"..steamid.."' ;")
 	q:start()
-	local PlayerName = name
+	local PlayerName = name		--Get the player's name. Useful for display stuff mainly
 
 end
 
@@ -98,11 +98,39 @@ function VISTIO.AddUserIDQuery(calling_ply, TargetName, steamid, usergroup, time
 end
 
 function VISTIO.GetPlaytimeQuery(steamid)
-	local q = db:query("SELECT playtime FROM playerdata WHERE steamid='"..steamid.."';")
+	local q = db:query("SELECT playtime FROM playerdata WHERE steamid='"..steamid.."';") --Get the playtime from the database
 	q:start()
 	
-	local Playtime = playtime
+	local Playtime = playtime --put it in a better variable
 end
+
+function VISTIO.IsPlayerBanned(steamid)
+	local q = db:query("SELECT unbantime FROM bans WHERE steamid='"..steamid"' AND unbanreason IS NULL") --Grab the date where the player should be unbanned in UNIX format
+	q:start()
+	
+	local UnbanTime = unbantime
+	--Check whether or not player should be unbanned at this point
+	if UnbanTime > os.time() then
+		return true
+	elseif UnbanTime <= os.time() then
+		VISTIO.BanExpired(steamid)		--Set the ban to expired in the database if it is expired
+		return false
+	end
+
+end
+
+function VISTIO.BanExpired(steamid)
+	local q = db:query("UPDATE bans SET unbanreason='EXPIRED' WHERE steamid='"..steamid.."';")
+	q:start()
+
+end
+
+function VISTIO.UnbanPlayer(steamid)
+	local q = db:query("UPDATE bans SET unbanreason='UNBANNED' WHERE steamid='"..steamid.."';")
+	q:start()
+	
+end
+
 
 function q:onError( q, err , sql )
 		MsgN("Query failed! /n Error:" ..err.. "/n You should tell a super about this!")
