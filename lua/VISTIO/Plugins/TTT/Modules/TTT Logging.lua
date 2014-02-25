@@ -20,7 +20,7 @@ function MODULE.SaveToDamageLogs( victim, attacker, healthRemaining, damageTaken
 	--Create an index value for the table
 	local DamageIndex = DamageIndex + 1
 	--Create the table for it
-	VISTIO.DamageLogs = []
+	VISTIO.DamageLogs = {}
 	
 	if HealthRemaining <= 0 then
 		local DamageLogLine = "["..TimeStamp.."] "..Attacker.." ( "..AttackerID.." ) ["..AttackerTeam.."] killed "..Victim.."( "..VictimID.." ) ["..VictimTeam.."] /n"
@@ -49,7 +49,7 @@ function MODULE.SaveToKillLogs( victim, attacker, inflictor )
 	--Create an index value for the table
 	local KillIndex = KillIndex + 1
 	--Create the table
-	VISTIO.KillLogs = []
+	VISTIO.KillLogs = {}
 	
 	local KillLogLine = "["..TimeStamp.."] "..Attacker.." ( "..AttackerID.." ) ["..AttackerTeam.."] killed "..Victim.."( "..VictimID.." ) ["..VictimTeam.."] using "..WeaponUsed.."/n"
 	

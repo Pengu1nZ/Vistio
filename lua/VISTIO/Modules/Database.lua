@@ -25,6 +25,7 @@ end
 function VISTIO.GetName(calling_ply, steamid)
 	local q = db:query("SELECT name FROM playerdata WHERE steamid='"..steamid.."' ;")
 	q:start()
+	local Data = q:getData()
 	local PlayerName = Data[2]		--Get the player's name. Useful for display stuff mainly
 
 end
@@ -102,6 +103,7 @@ end
 function VISTIO.IsPlayerBanned(SteamID)
 	local q = db:query("SELECT * FROM bans WHERE steamid='"..SteamID.."' AND unbanreason IS NULL") --Grab the date where the player should be unbanned in UNIX format
 	q:start()
+	local Data = q:getData()
 	
 	local UnbanTime = Data[8]
 	local TimeBanned = Data[7]
@@ -116,7 +118,7 @@ function VISTIO.IsPlayerBanned(SteamID)
 			return true
 			local KickMessage = "You have been banned for "..TimeBanned..". Your ban will expire in "..BanTimeLeft.." minutes. You may appeal at ttt.carbonitegaming.net"
 		elseif UnbanTime <= os.time() then
-			VISTIO.BanExpired(steamid)		--Set the ban to expired in the database if it is expired
+			VISTIO.BanExpired(SteamID)		--Set the ban to expired in the database if it is expired
 			return false
 		end
 	end
@@ -150,6 +152,7 @@ end
 function VISTIO.GetPlaytime(SteamID)
 	local q = db:query("SELECT playtime FROM playerdata WHERE steamid='"..SteamID.."';")
 	q:start()
+	local Data = q:getData()
 	
 	local PlayTime = Data[8]
 end

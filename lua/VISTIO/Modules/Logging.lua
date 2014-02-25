@@ -13,7 +13,7 @@ function MODULE.SaveToChatLogs( sender, text, teamChat )
 	--Create an index value for the table
 	local ChatLogIndex = ChatLogIndex + 1
 	--Create the table
-	VISTIO.ChatLogs = []
+	VISTIO.ChatLogs = {}
 
 	if TeamChat then
 		local ChatLogLine = "["..TimeStamp.."](TEAM)"..Sender..":"..text.."/n"
