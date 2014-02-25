@@ -19,7 +19,7 @@ function MODULE.SetPlayerFlags( ply )
 	local PlayerName = ply:Name()
 	
 	VISTIO.GetPlayerFlags(SteamID)
-	ply:SetNWString( "Flags", PlayerFlags )
+	VISTIO.SetPlayerFlags(ply)
 	
 end
 hook.Add("PlayerInitialSpawn", "SetFlags", MODULE.SetPlayerFlags)
@@ -30,6 +30,8 @@ function MODULE.UpdateLastSeen( ply )
 	VISTIO.UpdateLastSeen(SteamID)
 end
 hook.Add("PlayerInitialSpawn", "UpdateLastSeen", MODULE.UpdateLastSeen)
+
+
 
 
 VISTIO.Core.RegisterModule(MODULE)
