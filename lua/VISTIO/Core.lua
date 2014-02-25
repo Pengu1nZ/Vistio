@@ -33,12 +33,22 @@ function CORE.LoadModule(s) -- Locates the files
 	include("VISTIO/Modules/"..s)
 end
 
+function CORE.LoadPluginModule(s)
+	include("VISTIO/Plugins/*/Modules/"..s)
+end
+
 function CORE.LoadModules() -- Loads the Module files
 	VISTIO.Modules = {}
 	local files = file.Find("VISTIO/Modules/*.lua", "LUA")
 	for k, v in pairs(files) do
 		CORE.LoadModule(v)
 	end
+	
+	local PluginFiles = file.Find("VISTIO/Plugins/*/Modules/*.lua")
+	for k, v in pairs(PluginFiles) do
+		CORE.LoadPluginModule(v)
+	end
+	
 end
 
 function CORE.InitModules() -- Initializes the Modules

@@ -1,19 +1,60 @@
 TODO:
-	-All Modules
-	-All Plugins
-	-Define Command Structure
-	-Commands n shit
-	
-ORDER IN WHICH WE SHOULD DO SHET:
-
-	1. Modules
-		a. Commands.lua
-		b. Access.lua
-		c. Database.lua
-		d. Connect.lua
-		e. Logging.lua
-		f. Playtime.lua
-	2. Commands
-	3. TTT Plugin
-	4. Web shite
-	
+	-Modules
+		-Logging.lua
+			-Web dump of all logs
+		-Connect.lua
+			-Anything that I missed
+		-Access.lua
+			-Checking Flags
+			-Setting Accessgroup hierarchy
+			-Check for mutes
+		-Commands.lua
+			-Command Parsing
+				-Check for Caller accessgroup
+				-Compare with Target accessgroup
+				-Notify all players
+	-Commands
+		-Ban					| "M"
+		-BanID					| "M"
+		-SetGroup				| "D"
+		-SetGroupID				| "D"
+		-UnbanID				| "D"
+		-Kick					| "M"
+		-Slay					| "M"
+		-MuteVoice(Toggle)		| "M"
+		-MuteChat(Toggle)		| "M"
+		-Freeze(Toggle)			| "A"
+		-Goto					| "M"
+		-Bring					| "M"
+		-Tele					| "A"
+		-Send					| "A"
+		-Spectate				| "A"
+		-AdminChat				| "U"
+		-HighAdminChat			| "D"
+		-Help					| "U"
+		-Who					| "U"
+		-MOTD					| "U"
+		-Megathread				| "U"
+		-Donate					| "U"
+	-Plugins
+		-TTT
+			-Modules
+				-Stats.lua
+					-All T Kills
+					-All Inno kills
+					-All D Kills
+				-TTTLogs.lua
+					-Log Damage
+					-Log Kills
+			-Commands
+				-Force			| "D"
+				-ForceNR		| "M"
+				-SlayNR			| "M"
+				-RSlayNR		| "M"
+				-SetKarma		| "A"
+				-SlayNRID		| "M"
+				-RSlayNRID		| "M"
+				-Respawn		| "M"
+				-RespawnTP		| "M"
+				-DamageLogs		| "M"
+				-KillLogs		| "M"

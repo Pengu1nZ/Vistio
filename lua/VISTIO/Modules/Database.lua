@@ -25,7 +25,7 @@ end
 function VISTIO.GetName(calling_ply, steamid)
 	local q = db:query("SELECT name FROM playerdata WHERE steamid='"..steamid.."' ;")
 	q:start()
-	local PlayerName = name		--Get the player's name. Useful for display stuff mainly
+	local PlayerName = Data[2]		--Get the player's name. Useful for display stuff mainly
 
 end
 
@@ -43,10 +43,10 @@ function VISTIO.BanQuery(calling_ply, target_ply, reason, bantime )
 	
 end
 
-function VISTIO.BanIDQuery(calling_ply, steamid, TargetName, reason, bantime )
+function VISTIO.BanIDQuery(calling_ply, SteamID, TargetName, reason, bantime )
 	local AdminName = calling_ply:Name() 		--Grab admin name
 	local AdminID = calling_ply:SteamID()		--Grab Admin SteamID
-	local TargetID = steamid					--just change the variable cuz lazy
+	local TargetID = SteamID					--just change the variable cuz lazy
 	local TimeCreated = os.time()				--Grab the Time the ban was created
 	local BanTimeSeconds = bantime * 60			--Get the ban time from minutes to seconds
 	local UnbanTime = TimeCreated + BanTimeSeconds	--Create the time where he'll be unbanned
@@ -80,10 +80,10 @@ function VISTIO.AddUserQuery(calling_ply, target_ply, usergroup, time)
 	q:start()
 end
 
-function VISTIO.AddUserIDQuery(calling_ply, TargetName, steamid, usergroup, time)
+function VISTIO.AddUserIDQuery(calling_ply, TargetName, SteamID, usergroup, time)
 	local AdminName = calling_ply:Name() 		--Grab admin name
 	local AdminID = calling_ply:SteamID()		--Grab Admin SteamID
-	local TargetID = steamid					--Swap Variables
+	local TargetID = SteamID					--Swap Variables
 	local TimeCreated = os.time()				--Grab the Time the user was set
 	local LengthSeconds = time * 60				--Change trial length from minutes to seconds
 	local ExpireTime = TimeCreated + LengthSeconds	--Create the time where the rank expires
@@ -97,46 +97,76 @@ function VISTIO.AddUserIDQuery(calling_ply, TargetName, steamid, usergroup, time
 	q:start()
 end
 
-function VISTIO.GetPlaytimeQuery(steamid)
-	local q = db:query("SELECT playtime FROM playerdata WHERE steamid='"..steamid.."';") --Get the playtime from the database
-	q:start()
-	
-	local Playtime = playtime --put it in a better variable
-end
 
-function VISTIO.IsPlayerBanned(steamid)
-	local q = db:query("SELECT unbantime FROM bans WHERE steamid='"..steamid"' AND unbanreason IS NULL") --Grab the date where the player should be unbanned in UNIX format
+
+function VISTIO.IsPlayerBanned(SteamID)
+	local q = db:query("SELECT * FROM bans WHERE steamid='"..SteamID.."' AND unbanreason IS NULL") --Grab the date where the player should be unbanned in UNIX format
 	q:start()
 	
-	local UnbanTime = unbantime
+	local UnbanTime = Data[8]
+	local TimeBanned = Data[7]
+	local CurrentTime = os.time()/60
+	local UnbanTimeMinutes = Unbantime/60
+	local BanTimeLeft = math.Round(UnbanTimeMinutes-CurrentTime)
 	--Check whether or not player should be unbanned at this point
-	if UnbanTime > os.time() then
-		return true
-	elseif UnbanTime <= os.time() then
-		VISTIO.BanExpired(steamid)		--Set the ban to expired in the database if it is expired
-		return false
+	if UnbanTime = 0 then
+		local KickMessage = "You are permanently banned. Appeal this at ttt.carbonitegaming.net"
+	elseif UnbanTime > 1 then
+		if UnbanTime > os.time() and UnbanTime then
+			return true
+			local KickMessage = "You have been banned for "..TimeBanned..". Your ban will expire in "..BanTimeLeft.." minutes. You may appeal at ttt.carbonitegaming.net"
+		elseif UnbanTime <= os.time() then
+			VISTIO.BanExpired(steamid)		--Set the ban to expired in the database if it is expired
+			return false
+		end
 	end
-
 end
 
-function VISTIO.BanExpired(steamid)
-	local q = db:query("UPDATE bans SET unbanreason='EXPIRED' WHERE steamid='"..steamid.."';") --If the ban expires normally, set the reason to expired
+function VISTIO.BanExpired(SteamID)
+	local q = db:query("UPDATE bans SET unbanreason='EXPIRED' WHERE steamid='"..SteamID.."' AND unbanreason IS NULL;") --If the ban expires normally, set the reason to expired
 	q:start()
 
 end
 
-function VISTIO.UnbanPlayer(steamid)
-	local q = db:query("UPDATE bans SET unbanreason='UNBANNED' WHERE steamid='"..steamid.."';") -- If the person is manually unbanned, set the reason to unbanned
+function VISTIO.UnbanPlayer(SteamID)
+	local q = db:query("UPDATE bans SET unbanreason='UNBANNED' WHERE steamid='"..SteamID.."';") -- If the person is manually unbanned, set the reason to unbanned
+	q:start()
+	
+end
+
+function VISTIO.GetPlayerFlags(SteamID)
+	local q = db:query("SELECT * FROM playerdata WHERE steamid='"..SteamID.."';")
+	q:start()
+	
+	local PlayerFlags = Data[4] --localize4jeezus
+end
+
+function VISTIO.SavePlayerFlags(SteamID, PlayerFlags)
+	local q = db:query("UPDATE playerdata SET flags='"..PlayerFlags.."' WHERE steamid='"..SteamID.."';")
 	q:start()
 	
 end
 
-function VISTIO.GetPlayerFlags(steamid)
-	local q = db:query("SELECT flags FROM playerdata WHERE steamid='"..steamid.."';")
+function VISTIO.GetPlaytime(SteamID)
+	local q = db:query("SELECT playtime FROM playerdata WHERE steamid='"..SteamID.."';")
 	q:start()
 	
-	local PlayerFlags = flags --localize4jeezus
+	local PlayTime = Data[8]
 end
+
+function VISTIO.SavePlaytime(SteamID, PlayTime)
+	local q = db:query("INSERT INTO playerdata( 'playtime', 'steamid') VALUES(PlayTime,steamid) ON DUPLICATE KEY UPDATE  'playtime'='"..PlayTime.."' ;")
+	q:start()
+	
+
+end
+
+function VISTIO.UpdateLastSeen(SteamID)
+	local q = db:query("UPDATE playerdata SET lastseen="..os.time().." WHERE steamid='"..SteamID.."';")
+	q:start()
+
+end
+
 
 function q:onError( q, err , sql )
 		MsgN("Query failed! /n Error:" ..err)
@@ -147,3 +177,5 @@ function q:onSuccess( q )
 end
 
 db:connect()
+
+VISTIO.Core.RegisterModule(MODULE)

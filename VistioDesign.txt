@@ -37,6 +37,7 @@ MODULES:
 	Playtime.lua
 		-Playtime counter to replace UTime
 		-MySQL based
+		-Maybe do something with VGUI idgaf
 	
 COMMANDS:
 
@@ -48,9 +49,9 @@ COMMANDS:
 		-UnbanID			| "D"
 		-Kick				| "M"
 		-Slay				| "M"
-		-MuteVoice(Toggle)		| "M"
-		-MuteChat(Toggle)		| "M"
-		-Freeze(Toggle)			| "A"
+		-MuteVoice(Toggle)	| "M"
+		-MuteChat(Toggle)	| "M"
+		-Freeze(Toggle)		| "A"
 		-Goto				| "M"
 		-Bring				| "M"
 		-Tele				| "A"
@@ -62,8 +63,11 @@ PLUGINS:
 		COMMANDS:
 			-Play			| "U"
 			-PlayAll		| "J"
-			-Stop			| "U"
+			-StopAll		| "D"
+			-VoteStopAll	| "U"
+			-Stopcl			| "U"
 			-SongList		| "U"
+			-GrantJFlag		| "D"
 		FEATURES:
 			-Full SongList GUI
 			-URL Songs instead of DLing
@@ -80,7 +84,11 @@ PLUGINS:
 			-RSlayNRID		| "M"
 			-Respawn		| "M"
 			-RespawnTP		| "M"
-
+			-Damagelogs		| "M"
+			-KillLogs		| "M"
+		MODULES
+			-TTT Logging
+			-TTT Notifications
 			
 			
 WEB:
@@ -122,6 +130,8 @@ MISC:
 		VIP				| "V"
 		USER			| "U"
 		
-
+	MISC Flags:
+		Jukebox Access	| "J"
+		Untargetable	| "T"
 		
 		

@@ -1,5 +1,5 @@
 local MODULE = {}
-MODULE.Name = "Access"
+MODULE.Name = "TTT Stats"
 
 
 VISTIO.Core.RegisterModule(MODULE)

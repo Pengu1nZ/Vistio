@@ -1,0 +1,11 @@
+Things that I should add to each module file:
+
+ACCESS:
+	Functions:
+		GrantFlag
+		RevokeFlag
+		SetAccessGroup
+		CheckAccess
+	Metatable shit:
+		AccessGroup
+		Level
