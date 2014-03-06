@@ -3,15 +3,15 @@ COMMAND.Name = "RSlayNRID"
 COMMAND.RequiredFlag = "M"
 COMMAND.Description = "Removes rounsd of slaying from the selected ID"
 
-function COMMAND.CheckArgs(ply, target)
+function COMMAND.CheckArgs(ply, args)
 	
 end
 
-function COMMAND.CanRun(ply, target)
+function COMMAND.CanRun(ply, args)
 	
 end
 
-function COMMAND.CMD(ply, target)
+function COMMAND.CMD(ply, args)
 
 end
 

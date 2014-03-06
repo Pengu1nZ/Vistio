@@ -1,17 +1,17 @@
 local COMMAND = {}
 COMMAND.Name = "Send"
 COMMAND.RequiredFlag = "A"
-COMMAND.Description = "Teleports the targetted player to the second targetted player"
+COMMAND.Description = "Teleports the argsted player to the second argsted player"
 
-function COMMAND.CheckArgs(ply, target)
+function COMMAND.CheckArgs(ply, args)
 	
 end
 
-function COMMAND.CanRun(ply, target)
+function COMMAND.CanRun(ply, args)
 	
 end
 
-function COMMAND.CMD(ply, target)
+function COMMAND.CMD(ply, args)
 
 end
 

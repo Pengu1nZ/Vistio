@@ -1,17 +1,17 @@
 local COMMAND = {}
 COMMAND.Name = "Bring"
 COMMAND.RequiredFlag = "M"
-COMMAND.Description = "Brings the targetted player to you"
+COMMAND.Description = "Brings the argsted player to you"
 
-function COMMAND.CheckArgs(ply, target)
+function COMMAND.CheckArgs(ply, args)
 	
 end
 
-function COMMAND.CanRun(ply, target)
+function COMMAND.CanRun(ply, args)
 	
 end
 
-function COMMAND.CMD(ply, target)
+function COMMAND.CMD(ply, args)
 
 end
 

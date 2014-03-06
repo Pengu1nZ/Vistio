@@ -3,15 +3,15 @@ COMMAND.Name = "DamageLogs"
 COMMAND.RequiredFlag = "M"
 COMMAND.Description = "Opens damagelogs for the past five rounds"
 
-function COMMAND.CheckArgs(ply, target)
+function COMMAND.CheckArgs(ply, args)
 	
 end
 
-function COMMAND.CanRun(ply, target)
+function COMMAND.CanRun(ply, args)
 	
 end
 
-function COMMAND.CMD(ply, target)
+function COMMAND.CMD(ply, args)
 
 end
 

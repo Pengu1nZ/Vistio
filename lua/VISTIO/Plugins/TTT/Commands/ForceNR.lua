@@ -1,17 +1,17 @@
 local COMMAND = {}
 COMMAND.Name = "ForceNR"
 COMMAND.RequiredFlag = "M"
-COMMAND.Description = "Silently forces the target to the selected team"
+COMMAND.Description = "Silently forces the args to the selected team"
 
-function COMMAND.CheckArgs(ply, target)
+function COMMAND.CheckArgs(ply, args)
 	
 end
 
-function COMMAND.CanRun(ply, target)
+function COMMAND.CanRun(ply, args)
 	
 end
 
-function COMMAND.CMD(ply, target)
+function COMMAND.CMD(ply, args)
 
 end
 

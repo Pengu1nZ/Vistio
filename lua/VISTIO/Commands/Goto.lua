@@ -1,17 +1,17 @@
 local COMMAND = {}
 COMMAND.Name = "Goto"
 COMMAND.RequiredFlag = "M"
-COMMAND.Description = "Moves you to the targetted player"
+COMMAND.Description = "Moves you to the argsted player"
 
-function COMMAND.CheckArgs(ply, target)
+function COMMAND.CheckArgs(ply, args)
 	
 end
 
-function COMMAND.CanRun(ply, target)
+function COMMAND.CanRun(ply, args)
 	
 end
 
-function COMMAND.CMD(ply, target)
+function COMMAND.CMD(ply, args)
 
 end
 

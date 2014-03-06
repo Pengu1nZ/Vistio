@@ -1,17 +1,17 @@
 local COMMAND = {}
 COMMAND.Name = "SlayNR"
 COMMAND.RequiredFlag = "M"
-COMMAND.Description = "Slays the targetted player next round"
+COMMAND.Description = "Slays the argsted player next round"
 
-function COMMAND.CheckArgs(ply, target)
+function COMMAND.CheckArgs(ply, args)
 	
 end
 
-function COMMAND.CanRun(ply, target)
+function COMMAND.CanRun(ply, args)
 	
 end
 
-function COMMAND.CMD(ply, target)
+function COMMAND.CMD(ply, args)
 
 end
 

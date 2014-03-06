@@ -6,6 +6,7 @@ ACCESS:
 		RevokeFlag
 		SetAccessGroup
 		CheckAccess
+		SetAccess
 	Metatable shit:
 		AccessGroup
 		Level

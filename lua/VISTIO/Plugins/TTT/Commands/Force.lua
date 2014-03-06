@@ -3,15 +3,15 @@ COMMAND.Name = "Force"
 COMMAND.RequiredFlag = "D"
 COMMAND.Description = "Forces a player to the selected team"
 
-function COMMAND.CheckArgs(ply, target)
+function COMMAND.CheckArgs(ply, args)
 	
 end
 
-function COMMAND.CanRun(ply, target)
+function COMMAND.CanRun(ply, args)
 	
 end
 
-function COMMAND.CMD(ply, target)
+function COMMAND.CMD(ply, args)
 
 end
 

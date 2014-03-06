@@ -1,17 +1,17 @@
 local COMMAND = {}
 COMMAND.Name = "Spectate"
 COMMAND.RequiredFlag = "A"
-COMMAND.Description = "Matches your view with the targetted player's"
+COMMAND.Description = "Matches your view with the argsted player's"
 
-function COMMAND.CheckArgs(ply, target)
+function COMMAND.CheckArgs(ply, args)
 	
 end
 
-function COMMAND.CanRun(ply, target)
+function COMMAND.CanRun(ply, args)
 	
 end
 
-function COMMAND.CMD(ply, target)
+function COMMAND.CMD(ply, args)
 
 end
 
