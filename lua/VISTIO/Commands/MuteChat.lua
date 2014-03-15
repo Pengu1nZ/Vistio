@@ -3,15 +3,15 @@ COMMAND.Name = "MuteChat"
 COMMAND.RequiredFlag = "M"
 COMMAND.Description = "Mutes the Chat of the selected player"
 
-function COMMAND.CheckArgs(ply, args)
+function COMMAND.CheckArgs(p, args)
 	
 end
 
-function COMMAND.CanRun(ply, args)
+function COMMAND.CanRun(p, args)
 	
 end
 
-function COMMAND.CMD(ply, args)
+function COMMAND.CMD(p, args)
 
 end
 

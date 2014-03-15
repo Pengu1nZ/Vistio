@@ -1,4 +1,5 @@
 Vistio
-======
 
-An admin mod designed and coded by Liam MacKay and Th3applek1d
+=======
+
+A Lua based Admin Mod developed by Liam MacKay, with special thanks to Kalamire.

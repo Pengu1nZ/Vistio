@@ -42,31 +42,31 @@ MODULES:
 COMMANDS:
 
 	Base:
-		-Ban				| "M"
+		-Ban					| "M" 
 		-BanID				| "M"
 		-SetGroup			| "D"
 		-SetGroupID			| "D"
-		-UnbanID			| "D"
-		-Kick				| "M"
-		-Slay				| "M"
+		-UnbanID				| "D"
+		-Kick					| "M"
+		-Slay					| "M"
 		-MuteVoice(Toggle)	| "M"
 		-MuteChat(Toggle)	| "M"
 		-Freeze(Toggle)		| "A"
-		-Goto				| "M"
-		-Bring				| "M"
-		-Tele				| "A"
-		-Send				| "A"
+		-Goto					| "M"
+		-Bring					| "M"
+		-Tele					| "A"
+		-Send					| "A"
 		
 PLUGINS:
 
 	JukeBox:
 		COMMANDS:
-			-Play			| "U"
-			-PlayAll		| "J"
-			-StopAll		| "D"
-			-VoteStopAll	| "U"
+			-Play				| "U"
+			-PlayAll			| "J"
+			-StopAll			| "D"
+			-VoteStopAll		| "U"
 			-Stopcl			| "U"
-			-SongList		| "U"
+			-SongList			| "U"
 			-GrantJFlag		| "D"
 		FEATURES:
 			-Full SongList GUI
@@ -75,17 +75,17 @@ PLUGINS:
 	
 	TTT:
 		COMMANDS
-			-Force			| "S"
-			-ForceNR		| "M"
+			-Force				| "S" | SILENCED
+			-ForceNR			| "M" | SILENCED
 			-SlayNR			| "M"
-			-RSlayNR		| "M"
+			-RSlayNR			| "M"
 			-SetKarma		| "A"
 			-SlayNRID		| "M"
 			-RSlayNRID		| "M"
-			-Respawn		| "M"
-			-RespawnTP		| "M"
-			-Damagelogs		| "M"
-			-KillLogs		| "M"
+			-Respawn			| "M" | SILENCED
+			-RespawnTP		| "M" | SILENCED
+			-Damagelogs		| "M" | SILENCED
+			-KillLogs			| "M" | SILENCED
 		MODULES
 			-TTT Logging
 			-TTT Notifications
@@ -123,15 +123,17 @@ WEB:
 MISC:
 
 	AcessGroups and their flags(Descending Order):
-		SUPERADMIN		| "S"
-		DOUBLEADMIN		| "D"
-		ADMIN			| "A"
-		MODERATOR		| "M"
-		VIP				| "V"
-		USER			| "U"
+		SUPERADMIN			| "S"		| 1
+		DOUBLEADMIN		| "D"		| 2
+		ADMIN				| "A"		| 3
+		MODERATOR			| "M"		| 4
+		VIP					| "V"		| 5
+		USER					| "U"		| 6
 		
 	MISC Flags:
-		Jukebox Access	| "J"
-		Untargetable	| "T"
+		Jukebox Access		| "J"
+		Untargetable			| "X"
+		Trial					| "T"
+		Perma					| "P"
 		
 		

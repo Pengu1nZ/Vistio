@@ -3,15 +3,15 @@ COMMAND.Name = "Spectate"
 COMMAND.RequiredFlag = "A"
 COMMAND.Description = "Matches your view with the argsted player's"
 
-function COMMAND.CheckArgs(ply, args)
+function COMMAND.CheckArgs(p, args)
 	
 end
 
-function COMMAND.CanRun(ply, args)
+function COMMAND.CanRun(p, args)
 	
 end
 
-function COMMAND.CMD(ply, args)
+function COMMAND.CMD(p, args)
 
 end
 

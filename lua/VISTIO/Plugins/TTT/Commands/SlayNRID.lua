@@ -3,15 +3,15 @@ COMMAND.Name = "SlayNRID"
 COMMAND.RequiredFlag = "M"
 COMMAND.Description = "Slays the player next time he connects."
 
-function COMMAND.CheckArgs(ply, args)
+function COMMAND.CheckArgs(p, args)
 	
 end
 
-function COMMAND.CanRun(ply, args)
+function COMMAND.CanRun(p, args)
 	
 end
 
-function COMMAND.CMD(ply, args)
+function COMMAND.CMD(p, args)
 
 end
 

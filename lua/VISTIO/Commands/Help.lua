@@ -3,15 +3,15 @@ COMMAND.Name = "Help"
 COMMAND.RequiredFlag = "U"
 COMMAND.Description = "Shows all commands that you can use"
 
-function COMMAND.CheckArgs(ply, args)
+function COMMAND.CheckArgs(p, args)
 	
 end
 
-function COMMAND.CanRun(ply, args)
+function COMMAND.CanRun(p, args)
 	
 end
 
-function COMMAND.CMD(ply, args)
+function COMMAND.CMD(p, args)
 
 end
 
