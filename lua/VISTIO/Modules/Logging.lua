@@ -11,22 +11,53 @@ function MODULE.SaveToChatLogs( sender, text, teamChat )
 	--Get a readable timestamp
 	local TimeStamp = tostring(os.date("%m/%d/%y %I:%M %p",os.time()))
 	--Create an index value for the table
-	local ChatLogIndex = ChatLogIndex + 1
+	local ChatLogIndex = ChatLogIndex - 1 or 100
 	--Create the table
 	VISTIO.ChatLogs = {}
 
 	if TeamChat then
-		local ChatLogLine = "["..TimeStamp.."](TEAM)"..Sender..":"..text.."/n"
+		local ChatLogLine = "["..TimeStamp.."](TEAM)"..Sender..":"..text.."\n"
 	else
-		local ChatLogLine = "["..TimeStamp.."]"..Sender..":"..text.."/n"
+		local ChatLogLine = "["..TimeStamp.."]"..Sender..":"..text.."\n"
 	end
-	
-	table.insert(VISTIO.ChatLogs, ChatLogIndex, ChatLogLine)
+	if ChatLogIndex = 1 then
+		MODULE.DumpChatLogs()
+		ChatLogIndex = 100
+	else
+		table.insert(VISTIO.ChatLogs, ChatLogIndex, ChatLogLine)
+	end
 end
 hook.Add( "PlayerSay", "SaveToChatLogs", MODULE.SaveToChatLogs )
 
-function MODULE.DumpChatLogs( Sender, Text, TeamChat )
+function MODULE.DumpChatLogs()
+	for k,v in pairs(VISTIO.ChatLogs) do
+		file.Append("VISTIOChatLog.txt", VISTIO.ChatLogs[v] )
+	end
+end
+
+--[[Command Logs]]--
+function VISTIO.SaveToCommandLogs( p , a , c )
+	local TimeStamp = tostring(os.date("%m/%d/%y %I:%M %p",os.time()))
 	
+	local CMDLogIndex = CMDLogIndex - 1 or 100
+	
+	local CMDLogLine = "["..TimeStamp.."] VISTIO COMMAND: "..p:Name().."("..p:SteamID().." " .. c:lower() .. " " .. table.concat(a, " ") .. ". \n"
+	
+	VISTIO.CMDLogs = {}
+	
+	if ChatLogIndex = 1 then
+		MODULE.DumpChatLogs()
+		ChatLogIndex = 100
+	else
+		table.insert(VISTIO.CMDLogs, CMDLogIndex, CMDLogLine)
+	end
+	
+end
+
+function MODULE.DumpCommandLogs()
+	for k,v in pairs(VISTIO.CMDLogs) do
+		file.Append("VISTIOCMDLog.txt", VISTIO.CMDLogs[v] )
+	end
 end
 
 
@@ -99,7 +130,7 @@ end
 	
 		
 local meta = FindMetaTable("Player")
-function meta:LAMMessage(msg, col)
+function meta:VISTIOMessage(msg, col)
 	VISTIO.Notify(self, msg, col)
 end
 

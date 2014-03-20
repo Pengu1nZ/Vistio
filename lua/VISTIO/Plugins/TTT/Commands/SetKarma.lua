@@ -3,15 +3,15 @@ COMMAND.Name = "SetKarma"
 COMMAND.RequiredFlag = "A"
 COMMAND.Description = "Sets the argsted player's karma"
 
-function COMMAND.CheckArgs(p, args)
+function COMMAND.CheckArgs(p, a)
 	
 end
 
-function COMMAND.CanRun(p, args)
+function COMMAND.CanRun(p, a)
 	
 end
 
-function COMMAND.CMD(p, args)
+function COMMAND.CMD(p, a)
 
 end
 
