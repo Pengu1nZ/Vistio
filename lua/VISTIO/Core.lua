@@ -58,6 +58,25 @@ end
 -- Adding Commands, Plugins, Connecting to the DB and etc can be accessed with Modules. --
 
 
+function FindPlayer(target)
+	target = string.lower( target )
+	for k, v in pairs ( player.GetAll() ) do
+	
+		if string.lower( v:SteamID() ) == target then
+			return v
+		end
+		
+		if string.lower( v:UniqueID() ) == target then
+			return v
+		end
+			
+		local name = string.lower( v:Name() )
+		if string.find( nick, target ) then
+			return v
+		end
+		
+	end
+end
 
 
 

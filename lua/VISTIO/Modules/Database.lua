@@ -30,11 +30,11 @@ function VISTIO.GetName(SteamID)
 	local PlayerName = PlayerResults.name --Get the player's name. Useful for display stuff mainly
 end
 
-function VISTIO.BanQuery(p, target_ply, reason, bantime )
+function VISTIO.BanQuery(p, target, reason, bantime )
 	local AdminName = p:Name() 		--Grab admin name
 	local AdminID = p:SteamID()		--Grab Admin SteamID
-	local TargetName = target_ply:Name()		--Grab the Target's Name
-	local TargetID = target_ply:SteamID()		--Grab the Target's SteamID
+	local TargetName = target:Name()		--Grab the Target's Name
+	local TargetID = target:SteamID()		--Grab the Target's SteamID
 	local TimeCreated = os.time()				--Grab the Time the ban was created
 	local BanTimeSeconds = bantime * 60			--Get the ban time from minutes to seconds
 	local UnbanTime = TimeCreated + BanTimeSeconds	--Create the time where he'll be unbanned
@@ -44,6 +44,16 @@ function VISTIO.BanQuery(p, target_ply, reason, bantime )
 	
 end
 
+function VISTIO.ConsoleBanQuery( target, reason, bantime )
+	local TargetName = target:Name()		--Grab the Target's Name
+	local TargetID = target:SteamID()		--Grab the Target's SteamID
+	local TimeCreated = os.time()				--Grab the Time the ban was created
+	local BanTimeSeconds = bantime * 60			--Get the ban time from minutes to seconds
+	local UnbanTime = TimeCreated + BanTimeSeconds	--Create the time where he'll be unbanned
+	
+	--Set up the query for a ban
+	local q = db:query("INSERT INTO bans ( `plysteamid`, `plyname`, `adminname`, `adminsteamid`, `reason`, `time`, `unbantime`, `timecreated` ) VALUES( '"..TargetID.."', '"..db:escape(TargetName).."', '"..db:escape("CONSOLE").."', 'CONSOLE', '"..db:escape(reason).."', "..BanTimeSeconds..", "..UnbanTime..", "..TimeCreated.."	);")
+end
 function VISTIO.BanIDQuery(p, SteamID, TargetName, reason, bantime )
 	local AdminName = p:Name() 		--Grab admin name
 	local AdminID = p:SteamID()		--Grab Admin SteamID
@@ -63,7 +73,7 @@ function VISTIO.BanIDQuery(p, SteamID, TargetName, reason, bantime )
 end
 
 
-function VISTIO.AddUserQuery(p, TargetGroup, time)
+function VISTIO.AddUserQuery( TargetGroup, time)
 	local TargetName = p:Name()		--Grab the Target's Name
 	local TargetID = p:SteamID()		--Grab the Target's SteamID
 	local TimeCreated = os.time()				--Grab the Time the user was set
