@@ -93,6 +93,27 @@ function MODULE.ParseCMD()
 end
 concommand.Add("VISTIO",MODULE.ParseCMD)
 
+function VISTIO.ChatCommand( p , text , teamChat )
+
+	if p.ChatMuted then 
+		return false 
+	end
+	
+	if teamChat then
+		return true
+	else
+		local textfcmd
+		if string.sub(text,0,1) == "!" then
+			textfcmd = string.Replace(text,"!","")
+			p:ConCommand("VISTIO "..textfcmd)
+			return false
+		elseif string.sub(text,0,1) == "/" then
+			textfcmd = string.Replace(text,"/","")
+			p:ConCommand("VISTIO "..textfcmd)
+			return false
+		end
+	end
 end
+hook.Add("PlayerSay", "VistioChat", VISTIO.ChatCommand)
 
 VISTIO.Core.RegisterModule(MODULE)

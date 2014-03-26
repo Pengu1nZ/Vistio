@@ -16,7 +16,8 @@ function COMMAND.CheckArgs(p,a)
 end
 
 function COMMAND.CanRun(p,a)
-	if VISTIO.CanTarget( p, a[1] ) then
+	local target = VISTIO.Core.FindPlayer(a[1])
+	if VISTIO.CanTarget( p, target) then
 		return true
 	else
 		p:VISTIOMessage(Format("%s cannot be brought (Has higher authority).",a[1]))

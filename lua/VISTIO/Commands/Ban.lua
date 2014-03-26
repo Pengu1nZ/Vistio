@@ -20,7 +20,7 @@ end
 function COMMAND.CheckArgs(p, a)
 	if p and p:IsValid() then
 		if #a > 0 and a[1] != "" then
-			if #GetPlayers(a[1]) > 1 then p:VISTIOMessage("Targetting more than one player, specify.") file.Append("MisBans.txt", p:SteamID() .. " - " .. table.concat(a, " ") .. "\n") return false end
+			if #GetPlayers(a[1]) > 1 then p:VISTIOMessage("Targetting more than one player, specify.") return false end
 			if VISTIO.Core.FindPlayer(a[1]) then
 				local time = tonumber(a[2])
 				if time && time >= 0 then
@@ -91,7 +91,7 @@ end
 
 function COMMAND.CanRun(p, a)
 	local target = VISTIO.Core.FindPlayer(a[1])
-	if VISTIO.Access.Groups[string.upper(p.AccessGroup)].Level > VISTIO.Access.Groups[string.upper(target.AccessGroup)].Level then
+	if VISTIO.CheckAccess(p, target) then
 		return true
 	else
 		p:VISTIOMessage(Format("%s cannot be banned (Has same/higher authority).",a[1]))
