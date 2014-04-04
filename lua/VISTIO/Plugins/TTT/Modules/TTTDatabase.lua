@@ -20,5 +20,80 @@ function db:onConnectionFailed(err)
         MsgN('VISTIO SQL is encountering an error: ' .. err)
 end
 
+function VISTIO.CheckSlayNR( target )
+	local steamid = target:SteamID()
+	local q = db:query("SELECT * FROM 'tttstats' WHERE 'steamid' = '"..steamid.."' ;")
+	q:start()
+	local Data = q:getData()
+	local PlayerResults = Data[1]
+	local SlaysLeft = PlayerResults.slaysleft
+	
+	if SlaysLeft > 0 then
+		return SlaysLeft
+	else
+		return 0
+	end
+end
+
+function VISTIO.AddSlayNR( target, NumSlays )
+	local steamid = target:SteamID()
+	local q = db:query("UPDATE 'tttstats' SET 'slaysleft'="..NumSlays.." WHERE 'steamid'="..steamid.."' ;")
+	q:start()
+	
+end
+
+function VISTIO.AddSlayNRID( steamid, NumSlays )
+	local q = db:query("UPDATE 'tttstats' SET 'slaysleft'="..NumSlays.." WHERE 'steamid'="..steamid.."' ;")
+	q:start()
+end
+
+function VISTIO.RemoveSlays( target, NumSlays )
+	local steamid = target:SteamID()
+	local q = db:query("SELECT * FROM 'tttstats' WHERE 'steamid' = '"..steamid.."' ;")
+	q:start()
+	local Data = q:getData()
+	local PlayerResults = Data[1]
+	local SlaysLeft = PlayerResults.slaysleft
+	
+	local NewSlays = SlaysLeft - NumSlays
+	local NewSlays = math.Round( NewSlays )
+	local q = db:query("UPDATE 'tttstats' SET 'slaysleft'="..NewSlays.." WHERE 'steamid'="..steamid.."' ;")
+	q:start()
+	
+	
+end
+
+function VISTIO.RemoveSlaysID( steamid, NumSlays )
+	local q = db:query("SELECT * FROM 'tttstats' WHERE 'steamid' = '"..steamid.."' ;")
+	q:start()
+	local Data = q:getData()
+	local PlayerResults = Data[1]
+	local SlaysLeft = PlayerResults.slaysleft
+	
+	local NewSlays = SlaysLeft - NumSlays
+	local NewSlays = math.Round( NewSlays )
+	local q = db:query("UPDATE 'tttstats' SET 'slaysleft'="..NewSlays.." WHERE 'steamid'="..steamid.."' ;")
+	q:start()
+end
+
+function VISTIO.CheckForce( target )
+
+end
+
+function VISTIO.AddForce( target, NumRounds, Team )
+	
+end
+
+function VISTIO.AddForceID( steamid, NumRounds, Team )
+
+end
+
+function VISTIO.RemoveForce( target, NumRounds, Team )
+
+end
+
+function VISTIO.RemoveForceID( steamid, NumRounds, Team )
+
+end
 
 VISTIO.Core.RegisterModule(MODULE)

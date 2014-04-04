@@ -71,7 +71,7 @@ function FindPlayer(target)
 		end
 			
 		local name = string.lower( v:Name() )
-		if string.find( nick, target ) then
+		if string.find( name, target ) then
 			return v
 		end
 		

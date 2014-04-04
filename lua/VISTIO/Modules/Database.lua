@@ -73,9 +73,9 @@ function VISTIO.BanIDQuery(p, SteamID, TargetName, reason, bantime )
 end
 
 
-function VISTIO.AddUserQuery( TargetGroup, time)
-	local TargetName = p:Name()		--Grab the Target's Name
-	local TargetID = p:SteamID()		--Grab the Target's SteamID
+function VISTIO.AddUserQuery( target, TargetGroup, time)
+	local TargetName = target:Name()		--Grab the Target's Name
+	local TargetID = target:SteamID()		--Grab the Target's SteamID
 	local TimeCreated = os.time()				--Grab the Time the user was set
 	local LengthSeconds = time * 60				--Change trial length from minutes to seconds
 	local ExpireTime = TimeCreated + LengthSeconds	--Create the time where the rank expires
@@ -160,8 +160,8 @@ function VISTIO.BanExpired(SteamID)
 
 end
 
-function VISTIO.UnbanPlayer(SteamID)
-	local q = db:query("UPDATE bans SET unbanreason='UNBANNED' WHERE steamid='"..SteamID.."';") -- If the person is manually unbanned, set the reason to unbanned
+function VISTIO.UnbanPlayer(SteamID, p)
+	local q = db:query("UPDATE bans SET unbanreason='UNBANNED', unbannedby = '"..p:Name().."' WHERE steamid='"..SteamID.."' AND unbanreason = NULL;") -- If the person is manually unbanned, set the reason to unbanned
 	q:start()
 	
 end

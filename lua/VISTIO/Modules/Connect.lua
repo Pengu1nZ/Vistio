@@ -37,8 +37,10 @@ function MODULE.SetPlayerAccess( p )
 	if TargetGroup = nil then
 		TargetGroup = "USER"
 		VISTIO.SetPlayerAccess( p , TargetGroup, 0 )
+		local target = p
+		VISTIO.AddUserQuery( target, TargetGroup, 0)
 	else
-		VISTIO.SetPlayerAccess( p , TargetGroup, 0 )
+		VISTIO.SetPlayerAccess( p , TargetGroup, Time )
 	end
 
 end
