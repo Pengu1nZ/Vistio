@@ -57,8 +57,8 @@ function MODULE.JoinMessage( ply )
 	SteamID = ply:SteamID()
 	Name = ply:Name()
 	
-	for k, ply in pairs( player.GetAll() ) do
-		ply:ChatPrint( "[LAM]:"..Name.."("..SteamID..") has joined the server" )
+	for k, v in pairs( player.GetAll() ) do
+		v:VISTIOMessage( Name.."("..SteamID..") has joined the server" )
 	end
 
 end

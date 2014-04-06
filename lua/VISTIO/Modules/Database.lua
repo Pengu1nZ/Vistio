@@ -142,11 +142,11 @@ function VISTIO.IsPlayerBanned(SteamID)
 	
 	--Check whether or not player should be unbanned at this point
 	if UnbanTime = 0 then
-		local KickMessage = "You are permanently banned. Appeal this at ttt.carbonitegaming.net"
+		local KickMessage = "You are permanently banned for "..PlayerResults.reason.." Appeal this at ttt.carbonitegaming.net"
 	elseif UnbanTime > 1 then
 		if UnbanTime > os.time() and UnbanTime then
 			return true
-			local KickMessage = "You have been banned for "..TimeBanned..". Your ban will expire in "..BanTimeLeft.." minutes. You may appeal at ttt.carbonitegaming.net"
+			local KickMessage = "You have been banned for "..TimeBanned..", for "..PlayerResults.reason.." Your ban will expire in "..BanTimeLeft.." minutes. You may appeal at ttt.carbonitegaming.net"
 		elseif UnbanTime <= os.time() then
 			VISTIO.BanExpired(SteamID)		--Set the ban to expired in the database if it is expired
 			return false
@@ -161,7 +161,7 @@ function VISTIO.BanExpired(SteamID)
 end
 
 function VISTIO.UnbanPlayer(SteamID, p)
-	local q = db:query("UPDATE bans SET unbanreason='UNBANNED', unbannedby = '"..p:Name().."' WHERE steamid='"..SteamID.."' AND unbanreason = NULL;") -- If the person is manually unbanned, set the reason to unbanned
+	local q = db:query("UPDATE bans SET unbanreason='UNBANNED', whoedited = '"..p:Name().."' WHERE steamid='"..SteamID.."' AND unbanreason = NULL;") -- If the person is manually unbanned, set the reason to unbanned
 	q:start()
 	
 end

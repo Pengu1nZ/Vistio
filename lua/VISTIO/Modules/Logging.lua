@@ -1,7 +1,7 @@
 local MODULE = {}
 MODULE.Name = "Logging"
 
-
+/*
 --[[CHATLOGS FUNCTIONS]]--
 function MODULE.SaveToChatLogs( sender, text, teamChat )
 	--I hate lowerCamelCase
@@ -75,6 +75,8 @@ function MODULE.FindOtherLogs()
 
 end
 
+
+*/
 --[[Chat notifications]]--
 util.AddNetworkString("VISTIO.Message")
 util.AddNetworkString("_CMessage")
