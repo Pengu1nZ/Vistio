@@ -94,7 +94,7 @@ function COMMAND.CMD(p,a)
 	if p and p:IsValid() then
 		VISTIO.GetName( steamid )
 			if tb and tb[1] then
-				if VISTIO.Access.Groups[string.upper(p.AccessGroup)].Level > VISTIO.Access.Groups[string.upper(tb[1].AccessGroup)].Level then
+				if VISTIO.CanTargetSteamID( p, steamid ) then
 					local query = Format([[SELECT ban_time, time_stamp, Unbanned FROM darkrp_banlist WHERE ban_steamid=%q ORDER By time_stamp DESC]],steamid)
 					DB.Query(query, function(target)
 						if target && target[1] then

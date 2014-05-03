@@ -4,6 +4,7 @@ MODULE.Name = "Connect"
 function MODULE.RefuseConnect(steamID)
 	--Change the steamid to the type we want
 	local SteamID = util.SteamIDFrom64(steamID)
+	local SteamID64 = steamID
 	
 	if VISTIO.IsPlayerBanned( SteamID ) then
 		game.ConsoleCommand("kickid "..SteamID.." "..KickMessage.."\n")
@@ -63,6 +64,37 @@ function MODULE.JoinMessage( ply )
 
 end
 hook.Add("PlayerInitialSpawn", "VISTIOJoinMessage", MODULE.JoinMessage )
+
+local APIKey = "<insert api key here>" -- See http://steamcommunity.com/dev/apikey
+
+
+function CheckFamilySharing(ply)
+    http.Fetch(
+        string.format("http://api.steampowered.com/IPlayerService/IsPlayingSharedGame/v0001/?key=%s&format=json&steamid=%s&appid_playing=4000",
+            APIKey,
+            ply:SteamID64()
+        ),
+        
+        function(body)
+            body = util.JSONToTable(body)
+
+            if not body or not body.response or not body.response.lender_steamid then
+                error(string.format("FamilySharing: Invalid Steam API response for %s | %s\n", ply:Nick(), ply:SteamID()))
+            end
+
+            local lender = body.response.lender_steamid
+            if lender ~= "0" then
+                return lender
+            end
+        end,
+        
+        function(code)
+            error(string.format("FamilySharing: Failed API call for %s | %s (Error: %s)\n", ply:Nick(), ply:SteamID(), code))
+        end
+    )
+end
+
+hook.Add("PlayerAuthed", "CheckFamilySharing", CheckFamilySharing)
 
 
 

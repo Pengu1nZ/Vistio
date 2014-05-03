@@ -126,7 +126,11 @@ function VISTIO.CanTargetSteamID( p, SteamID )
 		elseif VISTIO.Access.Groups[p.AccessGroup].AccessLevel > VISTIO.Access.Groups[TargetGroup].AccessLevel then
 			return false
 		elseif VISTIO.Access.Groups[TargetGroup].AccessLevel = VISTIO.Access.Groups[p.AccessGroup].AccessLevel then
-			return true
+			if VISTIO.HasFlag( p , "T" ) and string.find(PlayerFlags, "P") then
+				return false
+			else
+				return true
+			end
 		elseif VISTIO.Access.Groups[TargetGroup].AccessLevel > VISTIO.Access.Groups[p.AccessGroup].AccessLevel then
 			return true
 		elseif VISTIO.Access.Groups[p.AccessGroup].AccessLevel < VISTIO.Access.Groups[TargetGroup].AccessLevel then

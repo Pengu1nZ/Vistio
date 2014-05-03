@@ -1,8 +1,11 @@
 local MODULE = {}
 MODULE.Name = "Logging"
 
+VISTIO.Logs = {}
+
 /*
 --[[CHATLOGS FUNCTIONS]]--
+VISTIO.Logs.ChatLogs = {}
 function MODULE.SaveToChatLogs( sender, text, teamChat )
 	--I hate lowerCamelCase
 	local Sender = sender
@@ -11,7 +14,7 @@ function MODULE.SaveToChatLogs( sender, text, teamChat )
 	--Get a readable timestamp
 	local TimeStamp = tostring(os.date("%m/%d/%y %I:%M %p",os.time()))
 	--Create an index value for the table
-	local ChatLogIndex = ChatLogIndex - 1 or 100
+	local ChatLogIndex = ChatLogIndex - 1
 	--Create the table
 	VISTIO.ChatLogs = {}
 
@@ -24,22 +27,18 @@ function MODULE.SaveToChatLogs( sender, text, teamChat )
 		MODULE.DumpChatLogs()
 		ChatLogIndex = 100
 	else
-		table.insert(VISTIO.ChatLogs, ChatLogIndex, ChatLogLine)
+		table.insert(VISTIO.Logs.ChatLogs, ChatLogIndex, ChatLogLine)
 	end
 end
 hook.Add( "PlayerSay", "SaveToChatLogs", MODULE.SaveToChatLogs )
 
-function MODULE.DumpChatLogs()
-	for k,v in pairs(VISTIO.ChatLogs) do
-		file.Append("VISTIOChatLog.txt", VISTIO.ChatLogs[v] )
-	end
-end
 
 --[[Command Logs]]--
+VISTIO.Logs.CMDLogs = {}
 function VISTIO.SaveToCommandLogs( p , a , c )
 	local TimeStamp = tostring(os.date("%m/%d/%y %I:%M %p",os.time()))
 	
-	local CMDLogIndex = CMDLogIndex - 1 or 100
+	local CMDLogIndex = CMDLogIndex - 1
 	
 	local CMDLogLine = "["..TimeStamp.."] VISTIO COMMAND: "..p:Name().."("..p:SteamID().." " .. c:lower() .. " " .. table.concat(a, " ") .. ". \n"
 	
@@ -49,34 +48,22 @@ function VISTIO.SaveToCommandLogs( p , a , c )
 		MODULE.DumpChatLogs()
 		ChatLogIndex = 100
 	else
-		table.insert(VISTIO.CMDLogs, CMDLogIndex, CMDLogLine)
+		table.insert(VISTIO.Logs.CMDLogs, CMDLogIndex, CMDLogLine)
 	end
 	
 end
 
-function MODULE.DumpCommandLogs()
-	for k,v in pairs(VISTIO.CMDLogs) do
-		file.Append("VISTIOCMDLog.txt", VISTIO.CMDLogs[v] )
+
+function MODULE.SaveLogs()
+	if !file.Exists("VISTIO","DATA") then
+		file.CreateDir( "VISTIO" )
 	end
+	
+	local TimeStamp = tostring(os.date("%m/%d/%y %I:%M %p",os.time()))
+	file.Write("VISTIO Log - "..TimeStamp, "")
 end
-
-
---[[WEBDUMP FUNCTIONS]]--
-
-function MODULE.SendLogsToWeb()
-
-end
-
-
-
---[[ADDING OTHER THINGS TO LOG]]--
-
-function MODULE.FindOtherLogs()
-
-end
-
-
 */
+
 --[[Chat notifications]]--
 util.AddNetworkString("VISTIO.Message")
 util.AddNetworkString("_CMessage")
